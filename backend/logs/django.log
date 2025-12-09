@@ -1,0 +1,145 @@
+INFO 2025-12-09 20:58:07,380 autoreload 13776 24784 Watching for file changes with StatReloader
+INFO 2025-12-09 21:00:58,646 basehttp 13776 6436 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:00:58,713 basehttp 13776 11744 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:02:08,422 basehttp 13776 6436 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:02:16,434 basehttp 13776 11744 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:04:44,485 basehttp 13776 2452 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:04:44,499 basehttp 13776 18236 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:07:06,798 views 13776 24404 Document upload request received
+INFO 2025-12-09 21:07:06,803 views 13776 24404 Processing upload for file: Full Stack Developer Assessment _ Entry Level.pdf
+INFO 2025-12-09 21:07:06,918 views 13776 24404 Document uploaded successfully: ID 1
+INFO 2025-12-09 21:07:06,987 basehttp 13776 24404 "POST /api/documents/upload/ HTTP/1.1" 201 171
+INFO 2025-12-09 21:07:07,083 basehttp 13776 24404 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:08:33,806 basehttp 13776 24404 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:08:33,846 basehttp 13776 16764 "GET /api/documents/ HTTP/1.1" 200 158
+ERROR 2025-12-09 21:08:37,602 exceptions 13776 24404 Exception in <documents.views.WrappedAPIView object at 0x000002AE53459160>: Could not satisfy the request Accept header.
+Traceback (most recent call last):
+  File "C:\Users\Hp\Desktop\Assignment\backend\venv\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\Desktop\Assignment\backend\venv\Lib\site-packages\rest_framework\views.py", line 406, in initial
+    neg = self.perform_content_negotiation(request)
+  File "C:\Users\Hp\Desktop\Assignment\backend\venv\Lib\site-packages\rest_framework\views.py", line 310, in perform_content_negotiation
+    return conneg.select_renderer(request, renderers, self.format_kwarg)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp\Desktop\Assignment\backend\venv\Lib\site-packages\rest_framework\negotiation.py", line 78, in select_renderer
+    raise exceptions.NotAcceptable(available_renderers=renderers)
+rest_framework.exceptions.NotAcceptable: Could not satisfy the request Accept header.
+WARNING 2025-12-09 21:08:37,678 log 13776 24404 Not Acceptable: /api/documents/1/
+WARNING 2025-12-09 21:08:37,679 basehttp 13776 24404 "GET /api/documents/1/ HTTP/1.1" 406 130
+INFO 2025-12-09 21:11:59,888 autoreload 13776 24784 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-09 21:12:00,834 autoreload 18120 24084 Watching for file changes with StatReloader
+INFO 2025-12-09 21:12:05,580 autoreload 18120 24084 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-09 21:12:06,380 autoreload 2828 20192 Watching for file changes with StatReloader
+INFO 2025-12-09 21:12:10,999 autoreload 2828 20192 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-09 21:12:11,804 autoreload 14604 7048 Watching for file changes with StatReloader
+INFO 2025-12-09 21:12:16,425 autoreload 14604 7048 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-09 21:12:17,231 autoreload 8472 17056 Watching for file changes with StatReloader
+INFO 2025-12-09 21:12:22,892 autoreload 8472 17056 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-09 21:12:23,699 autoreload 23384 18300 Watching for file changes with StatReloader
+INFO 2025-12-09 21:14:38,286 basehttp 23384 10960 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:14:38,286 basehttp 23384 4420 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:14:40,514 basehttp 23384 10960 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:14:42,500 basehttp 23384 4420 "GET /api/documents/1/ HTTP/1.1" 200 181961
+INFO 2025-12-09 21:15:03,450 views 23384 4420 Document upload request received
+INFO 2025-12-09 21:15:03,451 views 23384 4420 Processing upload for file: SDE_Sushil.pdf
+INFO 2025-12-09 21:15:03,588 views 23384 4420 Document uploaded successfully: ID 2
+INFO 2025-12-09 21:15:03,591 basehttp 23384 4420 "POST /api/documents/upload/ HTTP/1.1" 201 135
+INFO 2025-12-09 21:15:03,701 basehttp 23384 4420 "GET /api/documents/ HTTP/1.1" 200 255
+INFO 2025-12-09 21:15:09,946 basehttp 23384 10960 "GET /api/documents/ HTTP/1.1" 200 255
+INFO 2025-12-09 21:15:10,023 basehttp 23384 4420 "GET /api/documents/ HTTP/1.1" 200 255
+INFO 2025-12-09 21:15:15,098 basehttp 23384 4420 "GET /api/documents/2/ HTTP/1.1" 200 89519
+INFO 2025-12-09 21:16:47,975 basehttp 23384 4420 "OPTIONS /api/documents/2/delete/ HTTP/1.1" 200 0
+INFO 2025-12-09 21:16:48,069 basehttp 23384 4420 "DELETE /api/documents/2/delete/ HTTP/1.1" 200 43
+INFO 2025-12-09 21:16:50,990 basehttp 23384 4420 "OPTIONS /api/documents/1/delete/ HTTP/1.1" 200 0
+INFO 2025-12-09 21:16:51,081 basehttp 23384 4420 "DELETE /api/documents/1/delete/ HTTP/1.1" 200 43
+INFO 2025-12-09 21:16:52,301 basehttp 23384 4420 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:16:52,346 basehttp 23384 10960 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 21:18:55,453 views 23384 9456 Document upload request received
+INFO 2025-12-09 21:18:55,456 views 23384 9456 Processing upload for file: Full_Stack_Developer_Assessment___Entry_Level.pdf
+INFO 2025-12-09 21:18:55,589 views 23384 9456 Document uploaded successfully: ID 3
+INFO 2025-12-09 21:18:55,592 basehttp 23384 9456 "POST /api/documents/upload/ HTTP/1.1" 201 171
+INFO 2025-12-09 21:18:55,684 basehttp 23384 9456 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:21:30,935 basehttp 23384 15856 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:21:30,976 basehttp 23384 19148 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:27:40,149 basehttp 23384 22448 "GET /api/documents/ HTTP/1.1" 200 158
+INFO 2025-12-09 21:30:50,872 autoreload 23384 18300 C:\Users\Hp\Desktop\Assignment\backend\documents\models.py changed, reloading.
+INFO 2025-12-09 21:30:51,884 autoreload 25108 14576 Watching for file changes with StatReloader
+INFO 2025-12-09 21:32:09,287 autoreload 25108 14576 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-09 21:32:10,178 autoreload 1948 1860 Watching for file changes with StatReloader
+INFO 2025-12-09 21:32:22,127 autoreload 1948 1860 C:\Users\Hp\Desktop\Assignment\backend\documents\urls.py changed, reloading.
+INFO 2025-12-09 21:32:23,012 autoreload 26548 15364 Watching for file changes with StatReloader
+INFO 2025-12-09 21:33:35,054 autoreload 26548 15364 C:\Users\Hp\Desktop\Assignment\backend\documents\serializers.py changed, reloading.
+INFO 2025-12-09 21:33:36,328 autoreload 16380 18412 Watching for file changes with StatReloader
+ERROR 2025-12-09 21:34:08,632 log 16380 6920 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:08,633 basehttp 16380 6920 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:08,633 log 16380 26084 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:08,634 basehttp 16380 26084 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:10,515 log 16380 6920 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:10,516 basehttp 16380 6920 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:10,540 log 16380 26084 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:10,541 basehttp 16380 26084 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:27,620 log 16380 6920 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:27,620 basehttp 16380 6920 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:27,673 log 16380 26084 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:27,674 basehttp 16380 26084 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:29,706 log 16380 6920 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:29,708 basehttp 16380 6920 "GET /api/documents/ HTTP/1.1" 500 240
+ERROR 2025-12-09 21:34:29,750 log 16380 26084 Internal Server Error: /api/documents/
+ERROR 2025-12-09 21:34:29,751 basehttp 16380 26084 "GET /api/documents/ HTTP/1.1" 500 240
+INFO 2025-12-09 21:41:46,952 autoreload 13924 18536 Watching for file changes with StatReloader
+INFO 2025-12-09 21:42:14,165 basehttp 13924 1784 "GET /api/documents/ HTTP/1.1" 200 205
+INFO 2025-12-09 21:42:14,166 basehttp 13924 17604 "GET /api/documents/ HTTP/1.1" 200 205
+INFO 2025-12-09 21:42:18,492 basehttp 13924 1784 "GET /api/documents/ HTTP/1.1" 200 205
+INFO 2025-12-09 21:42:18,511 basehttp 13924 17604 "GET /api/documents/ HTTP/1.1" 200 205
+INFO 2025-12-09 21:46:46,085 basehttp 13924 12372 "GET /api/documents/ HTTP/1.1" 200 205
+INFO 2025-12-09 21:46:46,180 basehttp 13924 16672 "GET /api/documents/ HTTP/1.1" 200 205
+INFO 2025-12-09 21:46:47,505 basehttp 13924 12372 "OPTIONS /api/documents/3/analyze/ HTTP/1.1" 200 0
+ERROR 2025-12-09 21:46:53,272 ai_analyzer 13924 16672 Error analyzing document with Gemini: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+ERROR 2025-12-09 21:46:53,278 ai_analyzer 13924 16672 Document analysis failed for 3: AI analysis failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+ERROR 2025-12-09 21:46:53,278 views 13924 16672 Document analysis failed: AI analysis failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+ERROR 2025-12-09 21:46:53,281 log 13924 16672 Internal Server Error: /api/documents/3/analyze/
+ERROR 2025-12-09 21:46:53,283 basehttp 13924 16672 "POST /api/documents/3/analyze/ HTTP/1.1" 500 229
+INFO 2025-12-09 23:13:40,723 autoreload 13924 18536 C:\Users\Hp\Desktop\Assignment\backend\documents\ai_analyzer.py changed, reloading.
+INFO 2025-12-09 23:13:44,033 autoreload 25224 9356 Watching for file changes with StatReloader
+INFO 2025-12-09 23:14:59,788 autoreload 628 26512 Watching for file changes with StatReloader
+INFO 2025-12-09 23:15:33,032 basehttp 628 18128 "GET /api/documents/ HTTP/1.1" 200 204
+INFO 2025-12-09 23:15:33,034 basehttp 628 4432 "GET /api/documents/ HTTP/1.1" 200 204
+INFO 2025-12-09 23:15:43,754 basehttp 628 18128 "OPTIONS /api/documents/3/delete/ HTTP/1.1" 200 0
+INFO 2025-12-09 23:15:43,843 basehttp 628 4432 "DELETE /api/documents/3/delete/ HTTP/1.1" 200 43
+INFO 2025-12-09 23:15:46,310 basehttp 628 18128 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 23:15:46,345 basehttp 628 4432 "GET /api/documents/ HTTP/1.1" 200 26
+INFO 2025-12-09 23:19:45,137 views 628 23356 Document upload request received
+INFO 2025-12-09 23:19:45,145 views 628 23356 Processing upload for file: Screenshot 2025-12-09 231902.pdf
+INFO 2025-12-09 23:19:45,285 views 628 23356 Document uploaded successfully: ID 4
+INFO 2025-12-09 23:19:45,288 basehttp 628 23356 "POST /api/documents/upload/ HTTP/1.1" 201 200
+INFO 2025-12-09 23:19:45,385 basehttp 628 23356 "GET /api/documents/ HTTP/1.1" 200 187
+INFO 2025-12-09 23:20:24,151 basehttp 628 23356 "OPTIONS /api/documents/4/analyze/ HTTP/1.1" 200 0
+ERROR 2025-12-09 23:20:24,536 ai_analyzer 628 23356 Document analysis failed for 4: No text content could be extracted from the PDF
+ERROR 2025-12-09 23:20:24,537 views 628 23356 Document analysis failed: No text content could be extracted from the PDF
+ERROR 2025-12-09 23:20:24,538 log 628 23356 Internal Server Error: /api/documents/4/analyze/
+ERROR 2025-12-09 23:20:24,540 basehttp 628 23356 "POST /api/documents/4/analyze/ HTTP/1.1" 500 76
+INFO 2025-12-09 23:22:08,108 views 628 16764 Document upload request received
+INFO 2025-12-09 23:22:08,111 views 628 16764 Processing upload for file: BNP Test Report Format_ PDF, Sample Template & Example Guide _ Drlogy.pdf
+INFO 2025-12-09 23:22:08,228 views 628 16764 Document uploaded successfully: ID 5
+INFO 2025-12-09 23:22:08,232 basehttp 628 16764 "POST /api/documents/upload/ HTTP/1.1" 201 242
+INFO 2025-12-09 23:22:08,327 basehttp 628 16764 "GET /api/documents/ HTTP/1.1" 200 390
+INFO 2025-12-09 23:22:13,162 basehttp 628 16764 "OPTIONS /api/documents/4/delete/ HTTP/1.1" 200 0
+INFO 2025-12-09 23:22:13,249 basehttp 628 16764 "DELETE /api/documents/4/delete/ HTTP/1.1" 200 43
+INFO 2025-12-09 23:22:14,368 basehttp 628 16764 "OPTIONS /api/documents/5/analyze/ HTTP/1.1" 200 0
+ERROR 2025-12-09 23:22:14,469 ai_analyzer 628 16764 Document analysis failed for 5: No text content could be extracted from the PDF
+ERROR 2025-12-09 23:22:14,469 views 628 16764 Document analysis failed: No text content could be extracted from the PDF
+ERROR 2025-12-09 23:22:14,471 log 628 16764 Internal Server Error: /api/documents/5/analyze/
+ERROR 2025-12-09 23:22:14,473 basehttp 628 16764 "POST /api/documents/5/analyze/ HTTP/1.1" 500 76
+ERROR 2025-12-09 23:22:22,543 ai_analyzer 628 16764 Document analysis failed for 5: No text content could be extracted from the PDF
+ERROR 2025-12-09 23:22:22,544 views 628 16764 Document analysis failed: No text content could be extracted from the PDF
+ERROR 2025-12-09 23:22:22,546 log 628 16764 Internal Server Error: /api/documents/5/analyze/
+ERROR 2025-12-09 23:22:22,547 basehttp 628 16764 "POST /api/documents/5/analyze/ HTTP/1.1" 500 76
+INFO 2025-12-09 23:22:32,840 views 628 16764 Document upload request received
+INFO 2025-12-09 23:22:32,841 views 628 16764 Processing upload for file: SDE_Sushil-1.pdf
+INFO 2025-12-09 23:22:32,967 views 628 16764 Document uploaded successfully: ID 6
+INFO 2025-12-09 23:22:32,971 basehttp 628 16764 "POST /api/documents/upload/ HTTP/1.1" 201 184
+INFO 2025-12-09 23:22:33,061 basehttp 628 16764 "GET /api/documents/ HTTP/1.1" 200 374
+INFO 2025-12-09 23:22:35,588 basehttp 628 16764 "OPTIONS /api/documents/6/analyze/ HTTP/1.1" 200 0
+INFO 2025-12-09 23:23:07,150 ai_analyzer 628 16764 Successfully analyzed document 6
+INFO 2025-12-09 23:23:07,152 basehttp 628 16764 "POST /api/documents/6/analyze/ HTTP/1.1" 200 4833
