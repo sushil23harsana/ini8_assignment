@@ -1,3 +1,4 @@
+/* src/components/DocumentList.tsx */
 import React, { useState, useEffect } from 'react';
 import DocumentItem from './DocumentItem';
 import { Document } from '../types/Document';
@@ -30,53 +31,31 @@ const DocumentList: React.FC<DocumentListProps> = ({
   });
 
   const fetchDocuments = async () => {
-    setListState(prev => ({
-      ...prev,
-      isLoading: true,
-      error: null
-    }));
-
+    setListState(prev => ({ ...prev, isLoading: true, error: null }));
     try {
-      // Use the API service with retry logic
       const data = await retryRequest(() => DocumentApiService.getDocuments(), 2);
-      
       setListState(prev => ({
         ...prev,
         documents: data.documents || [],
         isLoading: false,
         lastRefresh: new Date()
       }));
-
     } catch (error) {
       const errorMessage = getErrorMessage(error);
-      
-      setListState(prev => ({
-        ...prev,
-        isLoading: false,
-        error: errorMessage
-      }));
-
+      setListState(prev => ({ ...prev, isLoading: false, error: errorMessage }));
       onError(errorMessage);
     }
   };
 
-  // Fetch documents on component mount and when refresh is triggered
   useEffect(() => {
     fetchDocuments();
-  }, [refreshTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleRefresh = () => {
-    fetchDocuments();
-  };
+  }, [refreshTrigger]);
 
   const handleDocumentDeleted = (documentId: number) => {
-    // Remove document from local state
     setListState(prev => ({
       ...prev,
       documents: prev.documents.filter(doc => doc.id !== documentId)
     }));
-
-    // Notify parent component
     onDocumentDeleted(documentId);
   };
 
@@ -85,9 +64,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+      day: 'numeric'
     });
   };
 
@@ -96,100 +73,70 @@ const DocumentList: React.FC<DocumentListProps> = ({
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   };
-
-  const getTotalSize = (): string => {
-    const totalBytes = listState.documents.reduce((sum, doc) => sum + doc.filesize, 0);
-    return formatFileSize(totalBytes);
-  };
-
-  if (listState.isLoading && listState.documents.length === 0) {
-    return (
-      <div className="document-list">
-        <div className="list-header">
-          <h2>Your Medical Documents</h2>
-        </div>
-        <div className="loading-state">
-          <div className="loading-spinner"></div>
-          <p>Loading documents...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="document-list">
-      <div className="list-header">
-        <div className="header-content">
-          <h2>Your Medical Documents</h2>
-          <div className="list-stats">
-            <span className="document-count">
-              {listState.documents.length} document{listState.documents.length !== 1 ? 's' : ''}
-            </span>
-            {listState.documents.length > 0 && (
-              <span className="total-size">
-                Total: {getTotalSize()}
-              </span>
-            )}
+    <div className="dashboard-container">
+      {/* Stats Row */}
+      <div className="stats-row">
+        <div className="stat-card">
+          <div className="stat-icon icon-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <div className="stat-info">
+            <span className="stat-label">Total Documents</span>
+            <span className="stat-value">{listState.documents.length}</span>
           </div>
         </div>
-        
-        <div className="list-actions">
-          <button
-            type="button"
-            className="refresh-btn"
-            onClick={handleRefresh}
-            disabled={listState.isLoading}
-            title="Refresh document list"
-          >
-            {listState.isLoading ? '⟳' : '↻'} Refresh
-          </button>
-          
-          {listState.lastRefresh && (
-            <span className="last-refresh">
-              Last updated: {formatDate(listState.lastRefresh.toISOString())}
-            </span>
-          )}
+
+        <div className="stat-card">
+          <div className="stat-icon icon-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div className="stat-info">
+            <span className="stat-label">AI Analysis</span>
+            <span className="stat-value">Ready</span>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon icon-orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div className="stat-info">
+            <span className="stat-label">Security</span>
+            <span className="stat-value">Protected</span>
+          </div>
         </div>
       </div>
 
-      {listState.error && (
-        <div className="error-message">
-          <span className="error-icon">⚠️</span>
-          <span>{listState.error}</span>
-          <button 
-            type="button" 
-            className="retry-btn"
-            onClick={handleRefresh}
-          >
-            Retry
-          </button>
+      <div className="section-title">
+        <h2>Your Documents</h2>
+      </div>
+
+      {listState.isLoading && (
+        <div className="loading-state">
+          <div className="spinner"></div>
+          <p>Loading documents...</p>
         </div>
       )}
 
-      {listState.documents.length === 0 && !listState.isLoading && !listState.error ? (
-        <div className="empty-state">
-          <div className="empty-icon">📄</div>
-          <h3>No documents uploaded yet</h3>
-          <p>Upload your first medical document using the form above.</p>
-          <div className="empty-features">
-            <div className="feature">
-              <span className="feature-icon">📤</span>
-              <span>Upload PDF files</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">💾</span>
-              <span>Secure storage</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">📥</span>
-              <span>Easy download</span>
-            </div>
-          </div>
+      {listState.error && (
+        <div className="error-card">
+          <p>{listState.error}</p>
+          <button onClick={fetchDocuments}>Retry</button>
+        </div>
+      )}
+
+      {!listState.isLoading && listState.documents.length === 0 ? (
+        <div className="empty-state-card">
+          <div className="empty-icon">📂</div>
+          <h3>No documents yet</h3>
+          <p>Upload your first medical record to get started.</p>
         </div>
       ) : (
-        <div className="documents-grid">
+        <div className="documents-list-container">
           {listState.documents.map((document) => (
             <DocumentItem
               key={document.id}
@@ -200,13 +147,6 @@ const DocumentList: React.FC<DocumentListProps> = ({
               formatFileSize={formatFileSize}
             />
           ))}
-        </div>
-      )}
-
-      {listState.isLoading && listState.documents.length > 0 && (
-        <div className="loading-overlay">
-          <div className="loading-spinner small"></div>
-          <span>Refreshing...</span>
         </div>
       )}
     </div>

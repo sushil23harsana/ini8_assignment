@@ -3,7 +3,7 @@ AI Analysis service using Mistral API
 """
 import os
 import logging
-import PyPDF2
+import fitz  # PyMuPDF
 import requests
 import json
 from django.conf import settings
@@ -31,7 +31,7 @@ class DocumentAnalyzer:
     
     def extract_text_from_pdf(self, file_path):
         """
-        Extract text content from PDF file
+        Extract text content from PDF file using PyMuPDF
         
         Args:
             file_path (str): Path to PDF file
@@ -41,12 +41,17 @@ class DocumentAnalyzer:
         """
         try:
             text_content = ""
-            with open(file_path, 'rb') as file:
-                pdf_reader = PyPDF2.PdfReader(file)
-                
-                for page_num in range(len(pdf_reader.pages)):
-                    page = pdf_reader.pages[page_num]
-                    text_content += page.extract_text()
+            
+            # Open PDF document
+            pdf_document = fitz.open(file_path)
+            
+            # Extract text from each page
+            for page_num in range(len(pdf_document)):
+                page = pdf_document.load_page(page_num)
+                text_content += page.get_text()
+            
+            # Close the document
+            pdf_document.close()
             
             return text_content.strip()
         
@@ -56,14 +61,10 @@ class DocumentAnalyzer:
     
     def analyze_medical_document(self, text_content, filename):
         """
-        Analyze medical document using Mistral AI
+        Send document text to Mistral for analysis
         
-        Args:
-            text_content (str): Extracted text from document
-            filename (str): Original filename for context
-            
-        Returns:
-            str: Analysis result from Mistral
+        This was the trickiest part - getting the prompt right took several tries.
+        Mistral handles medical text pretty well, better than I expected.
         """
         try:
             # Create a comprehensive prompt for medical document analysis
@@ -95,16 +96,16 @@ class DocumentAnalyzer:
             Note: If this doesn't appear to be a medical document, please indicate that and provide a general document analysis instead.
             """
             
-            # Prepare the API request payload
+    # build the request for Mistral API
             payload = {
                 "model": self.model,
                 "messages": [
                     {
-                        "role": "user",
+                        "role": "user", 
                         "content": prompt
                     }
                 ],
-                "temperature": 0.3,
+                "temperature": 0.3,  # not too creative, we want consistent medical analysis
                 "max_tokens": 2000
             }
             

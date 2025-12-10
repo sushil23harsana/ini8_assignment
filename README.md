@@ -1,6 +1,12 @@
 # Medical Document Portal
 
-A full-stack web application for managing medical documents (PDFs). Patients can upload, view, download, and delete their healthcare files through a clean web interface.
+A web app I built for managing medical documents. Basically lets you upload PDFs of medical stuff, view them inline, and organize everything. Started this because I was tired of losing track of my own medical papers!
+
+## What it does
+- Upload PDF medical documents
+- View them right in the browser (no more downloading to check what's inside)
+- AI analysis using Mistral API (pretty cool feature I added)
+- Clean, simple interface that actually works
 
 ## Project Structure
 
@@ -13,21 +19,22 @@ medical-document-portal/
 └── README.md
 ```
 
-## Tech Stack
+## Tech Stack & Why I Chose Them
 
-- **Frontend**: React 18 with TypeScript
-- **Backend**: Django 4.2 with Django REST Framework
-- **Database**: PostgreSQL for metadata storage
-- **File Storage**: Local file system
-- **Testing**: Jest + fast-check (frontend), pytest + Hypothesis (backend)
+- **Frontend**: React + TypeScript (love the type safety, saves debugging time)
+- **Backend**: Django REST Framework (Python is just comfortable for me)
+- **Database**: PostgreSQL (overkill maybe, but wanted to practice)
+- **File Storage**: Local filesystem (keeping it simple for now)
+- **AI**: Mistral API (switched from Gemini, better for EU compliance)
+- **PDF Viewing**: react-pdf (took forever to get working properly!)
 
-## Development Setup
+## Getting This Running
 
-### Prerequisites
-
-- Python 3.8 or higher
-- Node.js (v16 or higher)
-- PostgreSQL 12 or higher
+### You'll need:
+- Python 3.8+ (I used 3.13, but 3.8 should work)
+- Node.js 16+ (LTS version recommended)
+- PostgreSQL (I'm using 12, but newer should be fine)
+- A Mistral API key (sign up at mistral.ai - it's free to start)
 - npm or yarn
 
 ### Installation
