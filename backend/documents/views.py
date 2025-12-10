@@ -133,6 +133,7 @@ def list_documents(request):
         )
 
 
+@api_view(['GET', 'OPTIONS'])
 def download_document(request, document_id):
     """
     Download a specific document
@@ -142,6 +143,13 @@ def download_document(request, document_id):
     
     Requirements: 3.1, 3.2, 6.3
     """
+    # Handle CORS preflight requests
+    if request.method == 'OPTIONS':
+        response = HttpResponse()
+        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        response['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        return response
     # Validate document_id using InputValidator
     try:
         document_id = InputValidator.validate_document_id(document_id)
@@ -163,7 +171,7 @@ def download_document(request, document_id):
         raise Http404("File not found on disk")
     
     try:
-        # Serve file with proper headers
+        # Serve file with proper headers for inline viewing
         response = FileResponse(
             open(document.filepath, 'rb'),
             content_type='application/pdf'
@@ -171,8 +179,14 @@ def download_document(request, document_id):
         
         # Sanitize filename for Content-Disposition header
         safe_filename = document.filename.replace('"', '\\"')
-        response['Content-Disposition'] = f'attachment; filename="{safe_filename}"'
+        # Use inline instead of attachment to allow PDF preview
+        response['Content-Disposition'] = f'inline; filename="{safe_filename}"'
         response['Content-Length'] = document.filesize
+        
+        # Add CORS headers for frontend access
+        response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        response['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         
         return response
         

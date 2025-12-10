@@ -23,6 +23,9 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [showPDFViewer, setShowPDFViewer] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [showAnalysisModal, setShowAnalysisModal] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<string | null>(null);
 
   // ... (Keep existing Logic handlers like handleDownload, handleDelete, etc.)
   // For brevity in this display, I am using the handlers directly in the JSX below
@@ -57,6 +60,41 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
     }
   };
 
+  const [currentFactIndex, setCurrentFactIndex] = useState(0);
+
+  const healthcareFacts = [
+    "🏥 India has the world's largest healthcare workforce with over 4.7 million registered healthcare professionals!",
+    "💊 India is known as the 'Pharmacy of the World' - producing 60% of global vaccines and 20% of generic medicines!",
+    "🔬 The first cataract surgery was performed in India over 2,600 years ago, making it a pioneer in eye care!",
+    "🌿 Ayurveda, India's traditional medicine system, is over 5,000 years old and still widely practiced today!",
+    "🏥 India performs the highest number of cardiac surgeries in the world, with over 200,000 procedures annually!"
+  ];
+
+  const handleAnalyze = async () => {
+    setIsAnalyzing(true);
+    setShowAnalysisModal(true);
+    setAnalysisResult(null);
+    setCurrentFactIndex(0);
+
+    // Cycle through facts every 3 seconds during analysis
+    const factInterval = setInterval(() => {
+      setCurrentFactIndex(prev => (prev + 1) % healthcareFacts.length);
+    }, 3000);
+
+    try {
+      const result = await DocumentApiService.analyzeDocument(document.id);
+      setAnalysisResult(result.analysis || 'Analysis completed');
+      clearInterval(factInterval);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      onError(`Analysis failed: ${errorMessage}`);
+      setAnalysisResult(null);
+      clearInterval(factInterval);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return (
     <>
       <div className={`document-row ${isDeleting ? 'deleting' : ''}`}>
@@ -78,7 +116,7 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
         </div>
 
         <div className="doc-actions">
-          <button className="icon-btn analyze" title="AI Analysis">
+          <button className="icon-btn analyze" onClick={handleAnalyze} disabled={isAnalyzing} title="AI Analysis">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
           </button>
           
@@ -102,6 +140,124 @@ const DocumentItem: React.FC<DocumentItemProps> = ({
           fileName={document.filename}
           onClose={() => setShowPDFViewer(false)}
         />
+      )}
+
+      {showAnalysisModal && (
+        <div className="analysis-modal-overlay">
+          <div className="analysis-modal">
+            <div className="analysis-header">
+              <div className="analysis-title">
+                <span className="analysis-icon">🧠</span>
+                <h3>AI Document Analysis</h3>
+              </div>
+              <button 
+                className="close-btn" 
+                onClick={() => setShowAnalysisModal(false)}
+                disabled={isAnalyzing}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="analysis-file-info">
+              <strong>{document.filename}</strong>
+              <span>{formatFileSize(document.filesize)} • {formatDate(document.created_at)}</span>
+            </div>
+
+            <div className="analysis-content">
+              {isAnalyzing ? (
+                <div className="analysis-loading">
+                  <div className="loading-animation">
+                    <div className="scanning-line"></div>
+                    <div className="pulse-circles">
+                      <div className="pulse-circle pulse-1"></div>
+                      <div className="pulse-circle pulse-2"></div>
+                      <div className="pulse-circle pulse-3"></div>
+                    </div>
+                  </div>
+                  <div className="loading-text">
+                    <h4>🔍 Analyzing Your Document...</h4>
+                    <p>Our advanced AI is carefully examining your medical document. Please wait while we process the information.</p>
+                    
+                    <div className="loading-progress">
+                      <div className="progress-bar">
+                        <div className="progress-fill"></div>
+                      </div>
+                      <span className="progress-text">Processing...</span>
+                    </div>
+
+                    <div className="healthcare-facts">
+                      <div className="fact-header">
+                        <span className="fact-icon">💡</span>
+                        <h5>Did You Know?</h5>
+                      </div>
+                      <div className="fact-content">
+                        <p className="healthcare-fact">{healthcareFacts[currentFactIndex]}</p>
+                      </div>
+                      <div className="fact-indicator">
+                        {healthcareFacts.map((_, index) => (
+                          <span 
+                            key={index} 
+                            className={`fact-dot ${index === currentFactIndex ? 'active' : ''}`}
+                          ></span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : analysisResult ? (
+                <div>
+                  <div className="analysis-success">
+                    <span className="success-icon">✅</span>
+                    Analysis completed successfully!
+                  </div>
+                  <div className="analysis-text">
+                    {analysisResult.split('\n').map((line, index) => {
+                      const trimmedLine = line.trim();
+                      
+                      // Handle headings with **text**
+                      if (trimmedLine.startsWith('**') && trimmedLine.endsWith('**')) {
+                        return <h4 key={index} className="analysis-heading">{trimmedLine.slice(2, -2)}</h4>;
+                      }
+                      
+                      // Handle different bullet point formats
+                      if (trimmedLine.startsWith('- ') || trimmedLine.startsWith('• ') || trimmedLine.startsWith('* ')) {
+                        return <div key={index} className="analysis-list-item">{trimmedLine.slice(2)}</div>;
+                      }
+                      
+                      // Handle numbered lists
+                      if (/^\d+\.\s/.test(trimmedLine)) {
+                        return <div key={index} className="analysis-numbered-item">{trimmedLine}</div>;
+                      }
+                      
+                      // Regular paragraphs (skip empty lines)
+                      if (trimmedLine) {
+                        return <p key={index} className="analysis-paragraph">{trimmedLine}</p>;
+                      }
+                      
+                      return null;
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="analysis-error">
+                  <span className="error-icon">❌</span>
+                  <h4>Analysis Failed</h4>
+                  <p>Unable to analyze the document. Please try again.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="analysis-actions">
+              <button 
+                className="btn-secondary" 
+                onClick={() => setShowAnalysisModal(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

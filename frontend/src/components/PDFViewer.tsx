@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import './PDFViewer.css';
 
-// Set up the worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+// Set up the worker - try multiple sources for reliability
+if (typeof window !== 'undefined') {
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+}
 
 interface PDFViewerProps {
   fileUrl: string;
@@ -18,6 +20,30 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl, fileName, onClose }) => 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Add loading timeout
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (loading) {
+        setError('PDF loading timed out. The file might be too large or there\'s a network issue.');
+        setLoading(false);
+      }
+    }, 15000); // 15 second timeout
+
+    return () => clearTimeout(timeout);
+  }, [loading]);
+
+  // Handle escape key to close
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
     setLoading(false);
@@ -26,7 +52,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl, fileName, onClose }) => 
 
   const onDocumentLoadError = (error: any) => {
     console.error('PDF loading failed:', error);
-    setError('Hmm, PDF won\'t load. Try downloading it instead - sometimes that works better.');
+    setError('PDF viewer failed to load. You can try downloading the file or viewing it in a new tab.');
     setLoading(false);
   };
 
@@ -58,7 +84,12 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl, fileName, onClose }) => 
   };
 
   return (
-    <div className="pdf-viewer-overlay">
+    <div 
+      className="pdf-viewer-overlay" 
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div className="pdf-viewer-container">
         {/* Header */}
         <div className="pdf-viewer-header">
@@ -66,7 +97,18 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl, fileName, onClose }) => 
             <span className="pdf-icon">📄</span>
             <h3>{fileName}</h3>
           </div>
-          <button className="close-btn" onClick={onClose} title="Close">
+          <button className="close-btn" onClick={onClose} title="Close" style={{ 
+            position: 'relative', 
+            zIndex: 1000, 
+            background: 'rgba(255,255,255,0.9)', 
+            border: 'none', 
+            width: '40px', 
+            height: '40px', 
+            borderRadius: '50%', 
+            cursor: 'pointer',
+            fontSize: '24px',
+            color: '#333'
+          }}>
             ×
           </button>
         </div>
@@ -129,9 +171,18 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl, fileName, onClose }) => 
               <div className="error-icon">⚠️</div>
               <h4>Unable to load PDF</h4>
               <p>{error}</p>
-              <button onClick={onClose} className="btn-secondary">
-                Close
-              </button>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                <button onClick={onClose} className="btn-secondary">
+                  Close
+                </button>
+                <button 
+                  onClick={() => window.open(fileUrl, '_blank')} 
+                  className="btn-primary"
+                  style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer' }}
+                >
+                  Download Instead
+                </button>
+              </div>
             </div>
           )}
 

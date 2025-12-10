@@ -69,31 +69,49 @@ class DocumentAnalyzer:
         try:
             # Create a comprehensive prompt for medical document analysis
             prompt = f"""
-            Please analyze this medical document and provide a comprehensive summary. The document filename is: {filename}
+            You are a medical document analysis expert. Analyze this medical document and provide a comprehensive summary. Document filename: {filename}
             
             Document content:
-            {text_content[:12000]}  # Mistral can handle longer context
+            {text_content[:12000]}
             
-            Please provide analysis in the following structured format:
+            IMPORTANT: Format your response EXACTLY as shown below, using bullet points (-) for lists and double asterisks (**) for headings:
             
-            **Document Type**: [Identify if this is a prescription, lab report, medical record, etc.]
+            **Document Type**
+            [Identify the type: prescription, lab report, medical record, discharge summary, etc.]
             
-            **Key Medical Information**:
-            - Patient information (if mentioned)
-            - Medical conditions or diagnoses
-            - Medications prescribed
-            - Test results or measurements
-            - Treatment recommendations
+            **Key Medical Information**
+            - Patient demographics and basic information
+            - Primary medical conditions or diagnoses identified
+            - Medications mentioned with dosages (if applicable)
+            - Test results, vital signs, or measurements
+            - Treatment plans or medical procedures described
             
-            **Important Dates**: [Any relevant dates mentioned]
+            **Important Dates and Timeline**
+            - Document date and any significant medical dates
+            - Appointment schedules or follow-up dates mentioned
+            - Duration of treatments or medication schedules
             
-            **Summary**: [2-3 sentence summary of the document's purpose and key findings]
+            **Clinical Summary**
+            - Main purpose of this medical document
+            - Key findings or medical conclusions
+            - Overall health status assessment from document
             
-            **Recommendations**: [Any follow-up actions or recommendations mentioned]
+            **Medical Recommendations**
+            - Treatment recommendations or medical advice given
+            - Lifestyle modifications suggested
+            - Follow-up care instructions
+            - Referrals to specialists (if mentioned)
             
-            **Risk Factors**: [Any potential health risks or concerns identified]
+            **Risk Assessment**
+            - Potential health risks or red flags identified
+            - Contraindications or warnings mentioned
+            - Areas requiring immediate medical attention
             
-            Note: If this doesn't appear to be a medical document, please indicate that and provide a general document analysis instead.
+            **Additional Notes**
+            - Any other relevant medical information
+            - Document completeness and clarity assessment
+            
+            Note: If this is not a medical document, clearly state that and provide appropriate general document analysis.
             """
             
     # build the request for Mistral API

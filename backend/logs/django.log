@@ -16,3 +16,61 @@ ERROR 2025-12-10 14:46:41,286 views 12944 23192 Document analysis failed: No tex
 ERROR 2025-12-10 14:46:41,286 log 12944 23192 Internal Server Error: /api/documents/5/analyze/
 ERROR 2025-12-10 14:46:41,286 basehttp 12944 23192 "POST /api/documents/5/analyze/ HTTP/1.1" 500 76
 INFO 2025-12-10 15:31:55,872 autoreload 12796 9292 Watching for file changes with StatReloader
+INFO 2025-12-10 15:34:35,267 basehttp 12796 23836 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:34:35,269 basehttp 12796 26592 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:36:42,757 basehttp 12796 24240 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:36:42,765 basehttp 12796 4940 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:47:31,746 basehttp 12796 25948 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:47:50,143 basehttp 12796 25948 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:47:50,162 basehttp 12796 10088 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:48:26,408 basehttp 12796 25948 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:48:26,418 basehttp 12796 10088 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:48:47,152 basehttp 12796 25948 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:48:47,178 basehttp 12796 10088 "GET /api/documents/ HTTP/1.1" 200 540
+INFO 2025-12-10 15:49:01,776 basehttp 12796 25948 "GET /api/documents/7/ HTTP/1.1" 200 223789
+INFO 2025-12-10 15:49:11,796 basehttp 12796 25948 "GET /api/documents/6/ HTTP/1.1" 200 89519
+INFO 2025-12-10 15:49:24,659 basehttp 12796 25948 "OPTIONS /api/documents/7/delete/ HTTP/1.1" 200 0
+INFO 2025-12-10 15:49:24,771 basehttp 12796 25948 "DELETE /api/documents/7/delete/ HTTP/1.1" 200 43
+INFO 2025-12-10 15:55:28,547 basehttp 12796 12316 "GET /api/documents/ HTTP/1.1" 200 401
+INFO 2025-12-10 15:55:28,548 basehttp 12796 17884 "GET /api/documents/ HTTP/1.1" 200 401
+INFO 2025-12-10 15:55:53,943 basehttp 12796 17884 "GET /api/documents/ HTTP/1.1" 200 401
+INFO 2025-12-10 15:55:54,056 basehttp 12796 12316 "GET /api/documents/ HTTP/1.1" 200 401
+INFO 2025-12-10 15:56:03,035 views 12796 17884 Document upload request received
+INFO 2025-12-10 15:56:03,039 views 12796 17884 Processing upload for file: Photo-2.pdf
+INFO 2025-12-10 15:56:03,207 views 12796 17884 Document uploaded successfully: ID 8
+INFO 2025-12-10 15:56:03,211 basehttp 12796 17884 "POST /api/documents/upload/ HTTP/1.1" 201 180
+INFO 2025-12-10 15:56:03,342 basehttp 12796 12316 "GET /api/documents/ HTTP/1.1" 200 543
+INFO 2025-12-10 15:58:36,843 basehttp 12796 20648 "GET /api/documents/ HTTP/1.1" 200 543
+INFO 2025-12-10 15:58:36,848 basehttp 12796 13156 "GET /api/documents/ HTTP/1.1" 200 543
+INFO 2025-12-10 15:59:07,840 ai_analyzer 12796 20648 Successfully analyzed document 6
+INFO 2025-12-10 15:59:07,842 basehttp 12796 20648 "POST /api/documents/6/analyze/ HTTP/1.1" 200 4016
+INFO 2025-12-10 16:00:54,076 basehttp 12796 20648 "GET /api/documents/5/ HTTP/1.1" 200 104286
+INFO 2025-12-10 16:01:35,302 basehttp 12796 20648 "GET /api/documents/ HTTP/1.1" 200 543
+INFO 2025-12-10 16:01:35,319 basehttp 12796 2944 "GET /api/documents/ HTTP/1.1" 200 543
+INFO 2025-12-10 16:01:37,265 basehttp 12796 20648 "OPTIONS /api/documents/8/analyze/ HTTP/1.1" 200 0
+ERROR 2025-12-10 16:01:37,380 ai_analyzer 12796 20648 Document analysis failed for 8: No text content could be extracted from the PDF
+ERROR 2025-12-10 16:01:37,382 views 12796 20648 Document analysis failed: No text content could be extracted from the PDF
+ERROR 2025-12-10 16:01:37,384 log 12796 20648 Internal Server Error: /api/documents/8/analyze/
+ERROR 2025-12-10 16:01:37,386 basehttp 12796 20648 "POST /api/documents/8/analyze/ HTTP/1.1" 500 76
+INFO 2025-12-10 16:02:03,462 ai_analyzer 12796 20648 Successfully analyzed document 6
+INFO 2025-12-10 16:02:03,466 basehttp 12796 20648 "POST /api/documents/6/analyze/ HTTP/1.1" 200 4357
+INFO 2025-12-10 16:02:44,939 ai_analyzer 12796 20648 Successfully analyzed document 6
+INFO 2025-12-10 16:02:44,943 basehttp 12796 20648 "POST /api/documents/6/analyze/ HTTP/1.1" 200 4329
+INFO 2025-12-10 16:11:05,950 autoreload 12796 9292 C:\Users\Hp\Desktop\Assignment\backend\documents\ai_analyzer.py changed, reloading.
+INFO 2025-12-10 16:11:06,949 autoreload 5616 23352 Watching for file changes with StatReloader
+INFO 2025-12-10 16:11:41,002 basehttp 5616 10372 "GET /api/documents/ HTTP/1.1" 200 542
+INFO 2025-12-10 16:11:41,070 basehttp 5616 2992 "GET /api/documents/ HTTP/1.1" 200 542
+INFO 2025-12-10 16:11:45,151 views 5616 10372 Document upload request received
+INFO 2025-12-10 16:11:45,153 views 5616 10372 Processing upload for file: CBC Medical Report.pdf
+INFO 2025-12-10 16:11:45,272 views 5616 10372 Document uploaded successfully: ID 9
+INFO 2025-12-10 16:11:45,276 basehttp 5616 10372 "POST /api/documents/upload/ HTTP/1.1" 201 191
+INFO 2025-12-10 16:11:45,403 basehttp 5616 2992 "GET /api/documents/ HTTP/1.1" 200 695
+INFO 2025-12-10 16:11:52,089 basehttp 5616 2992 "OPTIONS /api/documents/9/analyze/ HTTP/1.1" 200 0
+INFO 2025-12-10 16:12:11,013 ai_analyzer 5616 2992 Successfully analyzed document 9
+INFO 2025-12-10 16:12:11,018 basehttp 5616 2992 "POST /api/documents/9/analyze/ HTTP/1.1" 200 3223
+INFO 2025-12-10 16:14:43,559 autoreload 5616 23352 C:\Users\Hp\Desktop\Assignment\backend\documents\ai_analyzer.py changed, reloading.
+INFO 2025-12-10 16:14:44,430 autoreload 21396 8196 Watching for file changes with StatReloader
+INFO 2025-12-10 16:15:36,804 autoreload 21396 8196 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-10 16:15:37,946 autoreload 10160 15936 Watching for file changes with StatReloader
+INFO 2025-12-10 16:15:50,147 autoreload 10160 15936 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
+INFO 2025-12-10 16:15:51,150 autoreload 20008 25168 Watching for file changes with StatReloader
