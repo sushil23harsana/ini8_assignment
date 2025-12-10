@@ -70,3 +70,20 @@ INFO 2025-12-10 17:06:18,194 autoreload 10648 10964 C:\Users\Hp\Desktop\Assignme
 INFO 2025-12-10 17:06:19,009 autoreload 15456 18180 Watching for file changes with StatReloader
 INFO 2025-12-10 17:06:30,252 autoreload 15456 18180 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
 INFO 2025-12-10 17:06:31,063 autoreload 10080 24624 Watching for file changes with StatReloader
+INFO 2025-12-10 17:06:44,512 basehttp 10080 24688 "GET /api/documents/ HTTP/1.1" 200 872
+INFO 2025-12-10 17:06:44,512 basehttp 10080 13088 "GET /api/documents/ HTTP/1.1" 200 872
+WARNING 2025-12-10 17:06:46,421 log 10080 24688 Not Found: /api/documents/9/
+WARNING 2025-12-10 17:06:46,423 basehttp 10080 24688 "GET /api/documents/9/ HTTP/1.1" 404 3839
+INFO 2025-12-10 17:07:29,193 basehttp 10080 24688 "OPTIONS /api/documents/9/delete/ HTTP/1.1" 200 0
+INFO 2025-12-10 17:07:29,299 basehttp 10080 24688 "DELETE /api/documents/9/delete/ HTTP/1.1" 200 43
+WARNING 2025-12-10 17:07:32,182 log 10080 24688 Not Found: /api/documents/8/
+WARNING 2025-12-10 17:07:32,184 basehttp 10080 24688 "GET /api/documents/8/ HTTP/1.1" 404 3839
+WARNING 2025-12-10 17:07:35,542 log 10080 24688 Not Found: /api/documents/5/
+WARNING 2025-12-10 17:07:35,545 basehttp 10080 24688 "GET /api/documents/5/ HTTP/1.1" 404 3839
+INFO 2025-12-10 17:08:29,907 basehttp 10080 24688 "GET /api/documents/ HTTP/1.1" 200 692
+INFO 2025-12-10 17:08:41,285 basehttp 10080 24688 "GET /api/documents/ HTTP/1.1" 200 692
+INFO 2025-12-10 17:08:41,293 basehttp 10080 7920 "GET /api/documents/ HTTP/1.1" 200 692
+INFO 2025-12-10 17:08:42,976 basehttp 10080 24688 "GET /api/documents/10/download/ HTTP/1.1" 200 2341367
+INFO 2025-12-10 17:08:52,050 basehttp 10080 24688 "GET /api/documents/8/download/ HTTP/1.1" 200 223789
+INFO 2025-12-10 17:15:12,808 autoreload 10080 24624 C:\Users\Hp\Desktop\Assignment\backend\documents\urls.py changed, reloading.
+INFO 2025-12-10 17:15:13,689 autoreload 21524 21216 Watching for file changes with StatReloader
