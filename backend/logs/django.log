@@ -74,3 +74,7 @@ INFO 2025-12-10 16:15:36,804 autoreload 21396 8196 C:\Users\Hp\Desktop\Assignmen
 INFO 2025-12-10 16:15:37,946 autoreload 10160 15936 Watching for file changes with StatReloader
 INFO 2025-12-10 16:15:50,147 autoreload 10160 15936 C:\Users\Hp\Desktop\Assignment\backend\documents\views.py changed, reloading.
 INFO 2025-12-10 16:15:51,150 autoreload 20008 25168 Watching for file changes with StatReloader
+INFO 2025-12-10 16:18:33,672 basehttp 20008 17556 "GET /api/documents/ HTTP/1.1" 200 722
+INFO 2025-12-10 16:18:33,672 basehttp 20008 22856 "GET /api/documents/ HTTP/1.1" 200 722
+INFO 2025-12-10 16:22:01,734 basehttp 20008 16796 "GET /api/documents/ HTTP/1.1" 200 722
+INFO 2025-12-10 16:22:01,744 basehttp 20008 12884 "GET /api/documents/ HTTP/1.1" 200 722
