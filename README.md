@@ -15,7 +15,6 @@ A comprehensive web application for managing medical documents. Upload, view, an
 medical-document-portal/
 ├── frontend/          # React TypeScript frontend
 ├── backend/           # Django REST Framework backend
-├── .kiro/specs/       # Feature specifications
 ├── design.md          # Design document and tech stack decisions
 └── README.md
 ```
